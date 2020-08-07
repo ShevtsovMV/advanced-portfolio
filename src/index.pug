@@ -47,7 +47,35 @@ block content
           .about__title Масим Шевцов
           .about__text-info Я занимаюсь разработкой современных сайтов и приложений. Мне нравится делать интересные и современные проекты.
           .about__ps Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
-
+  
+  section.values
+    .container.values__container
+      .values__info-block
+        h3.values__info-title Чем я могу быть полезен вам
+        .values__info-content
+          p Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
+      .values__widget
+        -
+          var skillsCategories = [
+            ["Front-end", ["HTML5", "CSS3", "Javascript", "Jquery и Vue.js"]],
+            ["Workflow", ["GIT", "Terminal", "Gulp", "Webpack"]],
+          ];
+        ul.skills
+          each category in skillsCategories
+            li.skills__item
+              .skills-row.skills__row
+                .skills-row__title #{category[0]}
+                ul.skills-row__list
+                 each skill in category[1]
+                  li.skill-row__item
+                    .skill
+                      svg.skill__circle-shape(viewBox="0 0 100 100")
+                        circle.skill__circle.skill__circle_layer_under(cx="50", cy="50" r="40")
+                        circle.skill__circle.skill__circle_layer_above(cx="50", cy="50" r="40" stroke="url(#gradient)" transform="rotate(180 50 50)")
+                        linearGradient(id="gradient" x1="0%" y1="0%" x2="100%" e2="0%")
+                          stop(offset="0%" stop-color="#EA7400")
+                          stop(offset="100%" stop-color="#F29400")
+                      .skill__title #{skill}
 
 
 
