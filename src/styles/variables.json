@@ -1,6 +1,9 @@
 {
   "text-color": "#414c63",
-  "links-color": "#4b6fd7",
+  "text-color-light": "#fff",
+  "text-color-dark": "#333C49",
+  "hover": "#FF9A00",
+  "links-color": "#586ED3",
   "errors-color": "#cd1515",
   "bp-desktop-hd": "1800px",
   "bp-desktop": "1200px",

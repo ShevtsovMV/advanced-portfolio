@@ -1,0 +1,56 @@
+.about__container {
+  display: flex;
+  max-width: 976px;
+  padding: 152px 0 274px;
+}
+
+.about__user {
+  width: 36%;
+  margin-right: 82px;
+}
+
+.user__data {
+  font-weight: 600;
+}
+
+.about__content {
+  flex: 1;
+  padding-top: 7px;
+}
+
+.about__desc {
+  color: rgba($text-color-light, 0.8);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.about__title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.about__text-info {
+  color: rgba($text-color-light, 0.8);
+  font-weight: 600;
+  line-height: 1.87;
+  margin-bottom: 80px;
+}
+
+.about__ps {
+  position: relative;
+  color: rgba($text-color-light, 0.8);
+  font-style: italic;
+  line-height: 1.87;
+  
+
+  &::before {
+    content: "";
+    width: 27px;
+    height: 51px;
+    position: absolute;
+    top: 0;
+    left: -50px;
+    background: svg-load('asterisk.svg', fill=rgba(219, 2, 0, 0.5), width=100%, height=100%) no-repeat;
+  }
+}
