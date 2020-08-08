@@ -20,7 +20,7 @@ block content
                   +icon(item, "socials__icon")
         .user-info
           p.user-info__text Личный сайт #[br] веб разработчика
-          h1.user-info__title Масим Шевцов
+          h1.user-info__title Максим Шевцов
         .hero__bottom-buttons
           button.scroll-down-btn Скролл
     
@@ -44,7 +44,7 @@ block content
                   td.user__data-content #{item[1]}
         .about__content
           .about__desc Привет, меня зовут
-          .about__title Масим Шевцов
+          h2.section-title.about__title Максим Шевцов
           .about__text-info Я занимаюсь разработкой современных сайтов и приложений. Мне нравится делать интересные и современные проекты.
           .about__ps Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
   
@@ -76,9 +76,31 @@ block content
                           stop(offset="0%" stop-color="#EA7400")
                           stop(offset="100%" stop-color="#F29400")
                       .skill__title #{skill}
-
-
-
+  section.works
+    .container.works__container
+      h2.section-title.works__section-title Мои работы
+      .works-slider
+        .works-slider__pics(data-slide="2")
+          +image("content/slider-1.jpg", "works-slider__fullpic")
+          ul.works-slider__thumbs
+            - for (var i = 1; i <= 4; i++)
+              li.works-slider__thumb-item(class=`${i === 1 ? 'active' : ''}`)
+                a.works-slider__thumb-link(href="#")
+                  +image(`content/slider-${i}.jpg`, "works-slider__thumb")
+          .works-slider__buttons
+            .square-btns
+              button.square-btns__item.square-btns__item_next(type="button")
+              button.square-btns__item.square-btns__item_prev(type="button")
+        .works-slider__data
+          - var tags = ["HTML", "CSS", "Javascript"]
+          ul.tags.works-slider__tags
+            each item in tags
+              li.tags__item
+                .tag #{item}
+          h3.works-slider__title Сайт школы образования
+          .works-slider__desc
+            p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
+          a.iconed-link(href="#") Посмотреть сайт
 
 
 
