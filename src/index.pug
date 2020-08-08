@@ -16,7 +16,7 @@ block content
             - var socials = ["insta", "github", "vk", "envelope"]
             each item in socials
               li.socials__item
-                a.socials__link(href="#")
+                a.socials__link(href="#" target="_blank")
                   +icon(item, "socials__icon")
         .user-info
           p.user-info__text Личный сайт #[br] веб разработчика
@@ -29,8 +29,7 @@ block content
         .about__user
           .user
             .user__avatar
-              .user__avatar-style
-                +image("content/user.jpg", "user__avatar-pic")
+              +image("content/user.jpg", "user__avatar-pic")
             -
               var userInfo = [
                 ["Проживаю:", "Счастье"],
@@ -76,6 +75,7 @@ block content
                           stop(offset="0%" stop-color="#EA7400")
                           stop(offset="100%" stop-color="#F29400")
                       .skill__title #{skill}
+  
   section.works
     .container.works__container
       h2.section-title.works__section-title Мои работы
@@ -100,7 +100,8 @@ block content
           h3.works-slider__title Сайт школы образования
           .works-slider__desc
             p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
-          a.iconed-link(href="#") Посмотреть сайт
+          a.iconed-link(href="#" target="_blank") Посмотреть сайт
+  
   section.reviews
     .container.reviews__container
       .reviews__header
@@ -123,6 +124,7 @@ block content
                     .user-display__info
                       .user-display__name Ковальчук Дмитрий
                       .user-display__occ Основатель Loftschool
+  
   footer.footer
     .container.footer__container
       .footer__copyright
@@ -146,7 +148,7 @@ block content
               ul.socials.socials_round-borders
                 each item in socials
                   li.socials__item
-                    a.socials__link(href="#")
+                    a.socials__link(href="#" target="_blank")
                       +icon(item, "socials__icon")
           .footer__data-col
             .footer__text-quote
