@@ -6,18 +6,26 @@ block content
       .container.hero__container
         header.header
           a.logo(href="#") МШ
-          nav.menu
+          nav.menu.header__menu
             - var menuLinks = ["Обо мне", "Навыки", "Работы", "Отзывы"]
             ul.menu__list
               each item in menuLinks
                 li.menu__item
                   a.menu__link(href="#") #{item}
-          ul.socials
+            ul.socials.menu__socials
+              - var socials = ["insta", "github", "vk", "envelope"]
+              each item in socials
+                li.socials__item
+                  a.socials__link(href="#" target="_blank")
+                    +icon(item, "socials__icon")
+          ul.socials.header__socials
             - var socials = ["insta", "github", "vk", "envelope"]
             each item in socials
               li.socials__item
                 a.socials__link(href="#" target="_blank")
                   +icon(item, "socials__icon")
+          button.hamburger-menu(href="#")
+            .hamburger-menu__stick
         .user-info
           p.user-info__text Личный сайт #[br] веб разработчика
           h1.user-info__title Максим Шевцов

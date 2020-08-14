@@ -1,27 +1,51 @@
 .about__container {
   display: flex;
+  justify-content: space-between;
   max-width: 976px;
   padding: 152px 0 274px;
+
+  @include desktop {
+    max-width: 100%;
+  }
+
+  @include tablets {
+    padding-bottom: 134px;
+  }
+
+  @include phones {
+    flex-direction: column;
+  }
 }
 
 .about__user {
   width: 36%;
-  margin-right: 82px;
-}
 
-.user__data {
-  font-weight: 600;
+  @include phones {
+    width: 100%;
+  }
 }
 
 .about__content {
-  flex: 1;
+  width: 56%;;
   padding-top: 7px;
+
+  @include tablets {
+    width: 54%;
+  }
+
+  @include phones {
+    width: 100%;
+  }
 }
 
 .about__desc {
   color: rgba($text-color-light, 0.8);
   font-weight: 600;
   margin-bottom: 20px;
+
+  @include phones {
+    margin-bottom: 5px;
+  }
 }
 
 .about__title {
@@ -33,6 +57,10 @@
   font-weight: 600;
   line-height: 1.87;
   margin-bottom: 80px;
+
+  @include tablets {
+    margin-bottom: 32px;
+  }
 }
 
 .about__ps {
@@ -50,5 +78,9 @@
     top: 0;
     left: -50px;
     background: svg-load('asterisk.svg', fill=rgba(219, 2, 0, 0.5), width=100%, height=100%) no-repeat;
+
+    @include phones {
+      left: -30px;
+    }
   }
 }

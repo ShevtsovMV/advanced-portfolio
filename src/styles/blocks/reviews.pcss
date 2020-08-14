@@ -4,16 +4,29 @@
 
 .reviews__container{
   padding: 141px 0;
+
+  @include phones {
+    padding: 82px 0;
+  }
 }
 
 .reviews__header {
   display: flex;
   align-items: center;
   margin-bottom: 77px;
+
+  @include phones {
+    flex-direction: column;
+  }
 }
 
 .reviews__title {
   margin-right: 115px;
+
+  @include phones {
+    margin-right: 0;
+    margin-bottom: 25px;
+  }
 }
 
 .reviews__buttons {
@@ -69,14 +82,26 @@
   display: flex;
   will-change: transform;
   transition: transform .3s;
+
+  @include desktop {
+    width: 86.3%;
+  }
+
+  @include tablets {
+    width: 100%;
+  }
 }
 
 .reviews__content-item {
   flex-shrink: 0;
-  margin-right: 30px;
+  margin-right: 3.0674%;
   width: 48.4663%;
 
     &:last-child {
     margin-right: 0;
+  }
+
+  @include phones {
+    width: 100%;
   }
 }

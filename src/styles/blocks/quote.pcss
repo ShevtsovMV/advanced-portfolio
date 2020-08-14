@@ -7,6 +7,10 @@
   position: relative;
 
   @include tablets {
+    padding-left: 17.25%;
+  }
+
+  @include phones {
     padding-left: 0;
   }
 
@@ -18,6 +22,15 @@
     position: absolute;
     top: 0;
     left: 0;
+
+    @include tablets {
+      width: 14%;
+      height: 17%;
+    }
+
+    @include phones {
+      display: none;
+    }
   }
 }
 
