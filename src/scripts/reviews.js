@@ -37,10 +37,9 @@ new Vue({
         return item
       });
     },
-    
     slide(direction) {
-      const swiper = this.$refs["mySwiper"].$swiper;
-      switch(direction) {
+      const swiper = this.$refs.mySwiper.$swiper;
+      switch (direction) {
         case "next":
           swiper.slideNext();
           break;
@@ -48,6 +47,22 @@ new Vue({
           swiper.slidePrev();
           break;
       }
+    },
+    enableDisableBtn() {
+      const prevBtn = this.$refs.prevBtn;
+      const nextBtn = this.$refs.nextBtn;
+      this.swiper.on('progress', function (swiper, progress) {
+        if (progress <= 0) {
+          prevBtn.setAttribute("disabled", "disabled");
+          nextBtn.removeAttribute("disabled");
+        } else if (progress >= 1) {
+          prevBtn.removeAttribute("disabled");
+          nextBtn.setAttribute("disabled", "disabled");
+        } else {
+          prevBtn.removeAttribute("disabled");
+          nextBtn.removeAttribute("disabled");
+        };
+      });
     }
   },
   computed: {
@@ -60,18 +75,6 @@ new Vue({
     this.reviews = this.requireImagesToArray(data);
   },
   mounted() {
-    const ref = this.$refs;
-    this.swiper.on('progress', function (swiper, progress) {
-      if(progress <= 0) {
-        ref.prevBtn.setAttribute("disabled", "disabled");
-        ref.nextBtn.removeAttribute("disabled");
-      } else if(progress >= 1) {
-        ref.prevBtn.removeAttribute("disabled");
-        ref.nextBtn.setAttribute("disabled", "disabled");
-      } else {
-        ref.prevBtn.removeAttribute("disabled");
-        ref.nextBtn.removeAttribute("disabled");
-      };
-    });
+    this.enableDisableBtn();
   }
 });
