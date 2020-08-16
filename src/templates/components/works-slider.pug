@@ -1,0 +1,58 @@
+script(type="text/x-template")#works-slider-container
+  .works-slider
+    display(
+      :currentWork="currentWork"
+      :works="works"
+      :currentIndex="currentIndex"
+      @slide="slide"
+    )
+    info(
+      :currentWork="currentWork"
+    )
+
+script(type="text/x-template")#works-slider-display
+  .works-slider__pics(:data-slide="currentIndex + 1")
+    img.works-slider__fullpic(:src="currentWork.photo", alt="")
+    thumbs(
+      :currentWork="currentWork",
+      :works="works"
+    )
+    .works-slider__buttons
+      buttons(
+        @slide="$emit('slide', $event)"
+      )
+      
+script(type="text/x-template")#works-slider-thumbs
+  ul.works-slider__thumbs
+    li.works-slider__thumb-item(
+      v-for="slide in works" :key="slide.id"
+      :class="{active: currentWork.id === slide.id}"
+    )
+      button.works-slider__thumb-btn(type="button")
+        img.works-slider__thumb(:src="slide.photo")
+
+script(type="text/x-template")#works-slider-buttons
+  .square-btns
+    button.square-btns__item.square-btns__item_next(
+      type="button"
+      @click="$emit('slide', 'next')"
+    )
+    button.square-btns__item.square-btns__item_prev(
+      type="button"
+      @click="$emit('slide', 'prev')"
+    )
+
+script(type="text/x-template")#works-slider-info
+  .works-slider__data
+    tags(
+      :tags="tagsArray"
+    )
+    h3.works-slider__title {{currentWork.title}}
+    .works-slider__desc
+      p {{currentWork.desc}}
+    a.iconed-link(:href="currentWork.link" target="_blank") Посмотреть сайт
+
+script(type="text/x-template")#works-slider-tags
+  ul.tags.works-slider__tags
+    li.tags__item(v-for="tag in tags")
+      .tag {{tag}}
