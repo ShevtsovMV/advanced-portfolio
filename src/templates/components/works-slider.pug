@@ -14,8 +14,9 @@ script(type="text/x-template")#works-slider-display
   .works-slider__pics(:data-slide="currentIndex + 1")
     img.works-slider__fullpic(:src="currentWork.photo", alt="")
     thumbs(
-      :currentWork="currentWork",
+      :currentWork="currentWork"
       :works="works"
+      @slide="$emit('slide', $event)"
     )
     .works-slider__buttons
       buttons(
@@ -28,7 +29,10 @@ script(type="text/x-template")#works-slider-thumbs
       v-for="slide in works" :key="slide.id"
       :class="{active: currentWork.id === slide.id}"
     )
-      button.works-slider__thumb-btn(type="button")
+      button.works-slider__thumb-btn(
+        type="button"
+        @click="$emit('slide', slide.id)"
+      )
         img.works-slider__thumb(:src="slide.photo")
 
 script(type="text/x-template")#works-slider-buttons

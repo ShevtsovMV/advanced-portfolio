@@ -80,6 +80,9 @@ new Vue({
         case "prev" :
           this.currentIndex--;
           break;
+          default :
+          this.currentIndex = direction;
+          break;
       }
     }
   },
