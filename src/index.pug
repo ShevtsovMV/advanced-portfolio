@@ -7,11 +7,11 @@ block content
         header.header
           a.logo(href="#") МШ
           nav.menu.header__menu
-            - var menuLinks = ["Обо мне", "Навыки", "Работы", "Отзывы"]
+            - var menuLinks = [["Обо мне", "#about"],["Навыки", "#values"],["Работы", "#works"],["Отзывы", "#contacts"]];
             ul.menu__list
               each item in menuLinks
                 li.menu__item
-                  a.menu__link(href="#") #{item}
+                  a.menu__link(href=`${item[1]}`) #{item[0]}
             ul.socials.menu__socials
               - var socials = ["insta", "github", "vk", "envelope"]
               each item in socials
@@ -30,9 +30,9 @@ block content
           p.user-info__text Личный сайт #[br] веб разработчика
           h1.user-info__title Максим Шевцов
         .hero__bottom-buttons
-          button.scroll-down-btn Скролл
+          a.scroll-down-btn(href="#about") Скролл
     
-    section.about
+    section.about#about
       .container.about__container
         .about__user
           .user
@@ -55,7 +55,7 @@ block content
           .about__text-info Я занимаюсь разработкой современных сайтов и приложений. Мне нравится делать интересные и современные проекты.
           .about__ps Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
   
-  section.values
+  section.values#values
     .container.values__container
       .values__info-block
         h3.values__info-title Чем я могу быть полезен вам
@@ -64,12 +64,12 @@ block content
       .values__widget
         #skills-component
   
-  section.works
+  section.works#works
     .container.works__container
       h2.section-title.works__section-title Мои работы
       #works-slider-component
   
-  section.contacts
+  section.contacts#contacts
     .container.contacts__container
       #reviews-component
   
@@ -86,7 +86,7 @@ block content
           ul.menu__list
             each item in menuLinks
               li.menu__item
-                a.menu__link(href="#") #{item}
+                a.menu__link(href=`${item[1]}`) #{item[0]}
         .footer__data-content
           .footer__data-col
             .footer__data-text-wrapper
