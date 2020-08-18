@@ -6,25 +6,33 @@ block content
       .container.hero__container
         header.header
           a.logo(href="#") МШ
-          nav.menu
-            - var menuLinks = ["Обо мне", "Навыки", "Работы", "Отзывы"]
+          nav.menu.header__menu
+            - var menuLinks = [["Обо мне", "#about"],["Навыки", "#values"],["Работы", "#works"],["Отзывы", "#contacts"]];
             ul.menu__list
               each item in menuLinks
                 li.menu__item
-                  a.menu__link(href="#") #{item}
-          ul.socials
+                  a.menu__link(href=`${item[1]}`) #{item[0]}
+            ul.socials.menu__socials
+              - var socials = ["insta", "github", "vk", "envelope"]
+              each item in socials
+                li.socials__item
+                  a.socials__link(href="#" target="_blank")
+                    +icon(item, "socials__icon")
+          ul.socials.header__socials
             - var socials = ["insta", "github", "vk", "envelope"]
             each item in socials
               li.socials__item
                 a.socials__link(href="#" target="_blank")
                   +icon(item, "socials__icon")
+          a.hamburger-menu(href="#")
+            .hamburger-menu__stick
         .user-info
           p.user-info__text Личный сайт #[br] веб разработчика
           h1.user-info__title Максим Шевцов
         .hero__bottom-buttons
-          button.scroll-down-btn Скролл
+          a.scroll-down-btn(href="#about") Скролл
     
-    section.about
+    section.about#about
       .container.about__container
         .about__user
           .user
@@ -47,83 +55,23 @@ block content
           .about__text-info Я занимаюсь разработкой современных сайтов и приложений. Мне нравится делать интересные и современные проекты.
           .about__ps Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
   
-  section.values
+  section.values#values
     .container.values__container
       .values__info-block
         h3.values__info-title Чем я могу быть полезен вам
         .values__info-content
           p Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
       .values__widget
-        -
-          var skillsCategories = [
-            ["Front-end", ["HTML5", "CSS3", "Javascript", "Jquery и Vue.js"]],
-            ["Workflow", ["GIT", "Terminal", "Gulp", "Webpack"]],
-          ];
-        ul.skills
-          each category in skillsCategories
-            li.skills__item
-              .skills-row.skills__row
-                .skills-row__title #{category[0]}
-                ul.skills-row__list
-                 each skill in category[1]
-                  li.skill-row__item
-                    .skill
-                      svg.skill__circle-shape(viewBox="0 0 100 100")
-                        circle.skill__circle.skill__circle_layer_under(cx="50", cy="50" r="40")
-                        circle.skill__circle.skill__circle_layer_above(cx="50", cy="50" r="40" stroke="url(#gradient)" transform="rotate(180 50 50)")
-                        linearGradient(id="gradient" x1="0%" y1="0%" x2="100%" e2="0%")
-                          stop(offset="0%" stop-color="#EA7400")
-                          stop(offset="100%" stop-color="#F29400")
-                      .skill__title #{skill}
+        #skills-component
   
-  section.works
+  section.works#works
     .container.works__container
       h2.section-title.works__section-title Мои работы
-      .works-slider
-        .works-slider__pics(data-slide="2")
-          +image("content/slider-1.jpg", "works-slider__fullpic")
-          ul.works-slider__thumbs
-            - for (var i = 1; i <= 4; i++)
-              li.works-slider__thumb-item(class=`${i === 1 ? 'active' : ''}`)
-                a.works-slider__thumb-link(href="#")
-                  +image(`content/slider-${i}.jpg`, "works-slider__thumb")
-          .works-slider__buttons
-            .square-btns
-              button.square-btns__item.square-btns__item_next(type="button")
-              button.square-btns__item.square-btns__item_prev(type="button")
-        .works-slider__data
-          - var tags = ["HTML", "CSS", "Javascript"]
-          ul.tags.works-slider__tags
-            each item in tags
-              li.tags__item
-                .tag #{item}
-          h3.works-slider__title Сайт школы образования
-          .works-slider__desc
-            p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
-          a.iconed-link(href="#" target="_blank") Посмотреть сайт
+      #works-slider-component
   
-  section.reviews
-    .container.reviews__container
-      .reviews__header
-        .reviews__title.section-title Что обо мне говорят
-        .reviews__buttons
-          button.reviews__btn.reviews__btn_prev(type="button")
-          button.reviews__btn.reviews__btn_next(type="button")
-      .reviews__content-wrapper
-        ul.reviews__content
-          - for (var i = 0; i < 2; i++)
-            li.reviews__content-item
-              .quote
-                .quote__text
-                  p Этот парень проходил обучение веб-разработке не где-то, а в Loftschool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!
-                .quote__user
-                  .user-display
-                    .user-display__avatar
-                      .user-display__pic-wrapper
-                        +image('content/user.jpg', 'user-display__avatar-pic')
-                    .user-display__info
-                      .user-display__name Ковальчук Дмитрий
-                      .user-display__occ Основатель Loftschool
+  section.contacts#contacts
+    .container.contacts__container
+      #reviews-component
   
   footer.footer
     .container.footer__container
@@ -138,7 +86,7 @@ block content
           ul.menu__list
             each item in menuLinks
               li.menu__item
-                a.menu__link(href="#") #{item}
+                a.menu__link(href=`${item[1]}`) #{item[0]}
         .footer__data-content
           .footer__data-col
             .footer__data-text-wrapper

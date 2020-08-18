@@ -4,8 +4,21 @@
 
 .works__container {
   padding: 197px 0 209px;
+
+  @include tablets {
+    padding: 122px 0;
+  }
+
+  @include phones {
+    padding: 104px 0;
+  }
 }
 
 .works__section-title {
   margin-bottom: 82px;
+
+  @include phones {
+    margin-bottom: 27px;
+    text-align: center;
+  }
 }

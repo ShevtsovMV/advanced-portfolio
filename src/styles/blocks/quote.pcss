@@ -7,6 +7,10 @@
   position: relative;
 
   @include tablets {
+    padding-left: 17.25%;
+  }
+
+  @include phones {
     padding-left: 0;
   }
 
@@ -14,10 +18,19 @@
     content: "";
     width: 16%;
     height: 34%;
-    background: svg-load('quote.svg', fill=#303133) center center / contain no-repeat;
+    background: svg-load('quote.svg', fill=#303133) top center / contain no-repeat;
     position: absolute;
     top: 0;
     left: 0;
+
+    @include tablets {
+      width: 14%;
+      height: 17%;
+    }
+
+    @include phones {
+      display: none;
+    }
   }
 }
 

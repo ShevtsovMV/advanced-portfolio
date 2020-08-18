@@ -1,6 +1,11 @@
 .menu__list {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+
+  @include tablets {
+    justify-content: flex-start;
+  }
 }
 
 .menu__item {
@@ -13,4 +18,17 @@
   &:hover {
     color: $hover;
   }
+
+  @include tablets {
+    padding-bottom: 23px;
+  }
+
+  @include phones {
+    width: 50%;
+    margin-right: 0;
+  }
+}
+
+.menu__socials.socials {
+  display: none;
 }

@@ -3,17 +3,30 @@
   font-weight: bold;
   padding-left: 8px;
   margin-bottom: 22px;
+
+  @include tablets {
+    font-size: 20px;
+    text-align: center;
+  }
 }
 
 .skills-row__list {
   display: flex;
   flex-wrap: wrap;
+
+  @include tablets {
+    justify-content: space-between;
+  }
 }
 
 .skill-row__item {
   margin-right: 36px;
 
   &:last-child {
+    margin-right: 0;
+  }
+
+  @include tablets {
     margin-right: 0;
   }
 }

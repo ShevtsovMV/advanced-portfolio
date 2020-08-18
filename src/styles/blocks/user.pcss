@@ -2,6 +2,16 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  @include phones {
+    align-items: center;
+  }
+}
+
+.about__user {
+  @include phones {
+    margin-bottom: 32px;
+  }
 }
 
 .user__avatar {
@@ -11,9 +21,29 @@
   border-radius: 50%;
   overflow: hidden;
   margin-bottom: 68px;
+
+  @include tablets {
+    margin-bottom: 10px;
+  }
+
+  @include phones {
+    margin-bottom: 34px;
+  }
+}
+
+.user__data {
+  font-weight: 600;
 }
 
 .user__data-title {
   color: rgba($text-color-light, 0.3);
   padding: 8px 80px 8px 0;
+
+  @include tablets {
+    padding-right: 16px;
+  }
+
+  @include phones {
+    padding-right: 68px;
+  }
 }

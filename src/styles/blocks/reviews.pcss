@@ -1,19 +1,20 @@
-.reviews {
-  background: url("~images/bg/reviews.jpg") top center / cover no-repeat;
-}
-
-.reviews__container{
-  padding: 141px 0;
-}
-
 .reviews__header {
   display: flex;
   align-items: center;
   margin-bottom: 77px;
+
+  @include phones {
+    flex-direction: column;
+  }
 }
 
 .reviews__title {
   margin-right: 115px;
+
+  @include phones {
+    margin-right: 0;
+    margin-bottom: 25px;
+  }
 }
 
 .reviews__buttons {
@@ -57,26 +58,9 @@
       background: svg-load('arrow-down.svg', fill=$hover) center center / contain no-repeat;
     }
   }
-}
 
-.reviews__content-wrapper {
-  min-height: 282px;
-}
-
-.reviews__content {
-  width: 65.99%;
-  overflow: hidden;
-  display: flex;
-  will-change: transform;
-  transition: transform .3s;
-}
-
-.reviews__content-item {
-  flex-shrink: 0;
-  margin-right: 30px;
-  width: 48.4663%;
-
-    &:last-child {
-    margin-right: 0;
+  &[disabled] {
+    opacity: 0.2;
+    pointer-events: none;
   }
 }

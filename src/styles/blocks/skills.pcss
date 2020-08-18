@@ -1,5 +1,36 @@
-.skills__item {
-  margin-left: 624px;
+.skills {
+  position: relative;
+}
+
+.skills::before {
+  position: absolute;
+  width: 662px;
+  height: 983px;
+  content: "";
+  background: url("~images/bg/hands.png") center center / cover no-repeat;
+  bottom: -35%;
+  left: -91%;
+  z-index: 5;
+  display: none;
+
+  @media screen and (max-width: 1500px) {
+    display: block;
+  }
+
+  @include tablets {
+    width: 323px;
+    height: 480px;
+    bottom: -308PX;
+    left: 25%;
+    transform: rotate(-90deg);
+  }
+
+  @include phones {
+    width: 208PX;
+    height: 320PX;
+    bottom: -226PX;
+    left: 14%;
+  }
 }
 
 .skills__row {

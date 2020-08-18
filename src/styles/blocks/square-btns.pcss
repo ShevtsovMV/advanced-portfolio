@@ -15,4 +15,19 @@
   &:hover {
     background: svg-load('arrow-down.svg', fill=$hover, width=10px, height=17px) center center no-repeat, #333C49;
   }
+
+  @include desktop {
+    width: 34px;
+    height: 34px;
+  }
+  
+  @include phones {
+    width: 55PX;
+    height: 55PX;
+    background: svg-load('arrow-down.svg', fill=$text-color-light, width=18px, height=20px) center center no-repeat, #333C49;
+  
+    &:hover {
+      background: svg-load('arrow-down.svg', fill=$hover, width=18px, height=20px) center center no-repeat, #333C49;
+    }
+  }
 }
