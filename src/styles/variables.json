@@ -1,7 +1,8 @@
 {
-  "text-color": "#414c63",
+  "text-color": "##414C63",
   "text-color-light": "#fff",
   "text-color-dark": "#333C49",
+  "bg-dark": "#43436B",
   "hover": "#FF9A00",
   "links-color": "#586ED3",
   "errors-color": "#cd1515",

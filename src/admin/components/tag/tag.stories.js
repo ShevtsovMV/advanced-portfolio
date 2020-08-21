@@ -15,8 +15,11 @@ export const defaultView = () => ({
 defaultView.story = {
   name: "Стандартный вид",
   parameters: {
-    backgrounds: [
-      { name: 'grey', value: '#8395a7', default: true },
-    ],
+    backgrounds: {
+      default: 'grey',
+      values: [
+        { name: 'grey', value: '#8395a7' },
+      ],
+    },
   },
 };
