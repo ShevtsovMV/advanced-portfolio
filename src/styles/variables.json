@@ -6,6 +6,7 @@
   "hover": "#FF9A00",
   "links-color": "#586ED3",
   "errors-color": "#cd1515",
+  "admin-main-color": "#383BCF",
   "bp-desktop-hd": "1800px",
   "bp-desktop": "1200px",
   "bp-tablets": "768px",
