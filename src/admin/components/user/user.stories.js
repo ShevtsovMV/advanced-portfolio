@@ -20,3 +20,7 @@ export const defaultView = () => ({
     <user />
   `,
 });
+
+defaultView.story = {
+  name: "Стандартный вид",
+};

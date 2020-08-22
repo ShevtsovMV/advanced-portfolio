@@ -14,3 +14,7 @@ export const defaultView = () => ({
     </headline>
   `,
 });
+
+defaultView.story = {
+  name: "Стандартный вид",
+};
