@@ -15,6 +15,8 @@
             @click="emptyCatIsShow = true" 
           />
         </div>
+      </div>
+      <div class="container-page-content">
         <ul class="skills">
           <li class="item" v-if="emptyCatIsShow">
             <category 

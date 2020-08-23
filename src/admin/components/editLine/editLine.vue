@@ -7,7 +7,7 @@
       </div>
     </div>
     <div v-else class="title">
-      <div class="input">
+      <div class="input-container">
         <app-input
           placeholder="Название новой группы"
           :value="value"

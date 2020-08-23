@@ -1,24 +1,49 @@
+@import "../styles/mixins.pcss";
+
 .app-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
+.container-page-content {
+  margin: 0 auto;
+  width: 95%;
+
+  @include phones {
+    width: 100%;
+  }
+}
+
 .page-content {
   flex: 1;
   background: url("../images/bg/admin.png") center center / cover no-repeat;
   padding: 54px 0 30px;
+
+  @include phones {
+    padding: 30px 0;
+  }
 }
 
 .header {
   display: flex;
   margin-bottom: 54px;
+
+  @include phones {
+    flex-direction: column;
+    margin-bottom: 40px;
+  }
 }
 
 .title {
   font-size: 21px;
   font-weight: bold;
   margin-right: 54px;
+
+  @include phones {
+    margin-right: 0;
+    margin-bottom: 26px;
+  }
 }
 
 .skills {
@@ -30,4 +55,8 @@
 .item {
   width: calc((100% - 24px) / 2);
   margin-bottom: 24px;
+
+  @include phones {
+    width: 100%;
+  }
 }
