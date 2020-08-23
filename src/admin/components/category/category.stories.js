@@ -2,9 +2,11 @@ import category from "./category.vue";
 import { action } from "@storybook/addon-actions";
 
 const methods = {
-  onRemove: action("onRemove"),
+  onRemoveCategoryTitle: action("onRemoveCategoryTitle"),
+  onApproveCategoryTitle: action("onApproveCategoryTitle"),
   onRemoveSkill: action("onRemoveSkill"),
   onEditSkill: action("onEditSkill"),
+  onAddSkill: action("onAddSkill"),
 };
 
 export default {
@@ -29,9 +31,11 @@ export const defaultView = () => ({
     <category 
       :title="title"
       :skills="skills"
-      @remove="onRemove"
+      @remove-category-title="onRemoveCategoryTitle"
+      @approve-category-title="onApproveCategoryTitle"
       @remove-skill="onRemoveSkill"
       @edit-skill="onEditSkill"
+      @add-skill="onAddSkill"
     />
   `,
   methods

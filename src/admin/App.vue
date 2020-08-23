@@ -20,14 +20,20 @@
         <ul class="skills">
           <li class="item" v-if="emptyCatIsShow">
             <category 
-              @remove="emptyCatIsShow = false"
+              @remove-category-title="emptyCatIsShow = false"
+              @approve-category-title="createNewCategory"
               empty 
             />
           </li>
-          <li class="item" v-for="category in categories" :key="category.id">
+          <li class="item" v-for="(category, index) in categories" :key="category.id">
             <category 
               :title="category.category"
               :skills="category.skills"
+              :categoryIndex="index"
+              @approve-category-title="onApproveCategoryTitle"
+              @edit-skill="editSkill"
+              @remove-skill="removeSkill"
+              @add-skill="addSkill"
             />
           </li>
         </ul>
@@ -57,8 +63,49 @@
         emptyCatIsShow: false
       };
     },
+    methods: {
+      editSkill(e, categoryIndex) {
+        const newObj = {
+          "id": e.id,
+          "title": e.title,
+          "percent": e.percent
+        };
+        this.categories[categoryIndex].skills.splice(e.id, 1, newObj);
+      },
+      removeSkill(skillIndex, categoryIndex) {
+        this.categories[categoryIndex].skills.splice(skillIndex, 1);
+      },
+      addSkill(e, categoryIndex) {
+        const arr = this.categories[categoryIndex].skills;
+        const arrLength = arr.length;
+        const lastArrElem = arr[arrLength - 1];
+        let newObjId = (arrLength == 0) ? 0 : (lastArrElem.id + 1);
+        const newObj = {
+          "id": newObjId,
+          "title": e.title,
+          "percent": e.percent
+        };
+        this.categories[categoryIndex].skills.push(newObj);
+
+      },
+      onApproveCategoryTitle(categoryTitle, categoryIndex) {
+        this.categories[categoryIndex].category = categoryTitle;
+      },
+      createNewCategory(categoryTitle, categoryIndex) {
+        const newObj = {
+          "id": this.categories[0].id - 1,
+          "category": categoryTitle,
+          "skills": []
+        };
+        this.categories.unshift(newObj);
+        this.emptyCatIsShow = false;
+      }
+    },
     created() {
       this.categories = require("./data/skills.json");
+    },
+    mounted() {
+
     }
   };
 </script>

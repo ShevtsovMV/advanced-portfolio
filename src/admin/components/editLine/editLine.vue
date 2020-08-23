@@ -11,7 +11,7 @@
         <app-input
           placeholder="Название новой группы"
           :value="value"
-          :errorText="errorText"
+          :errorMessage="errorMessage"
           @input="$emit('input', $event)"
           @keydown.native.enter="onApprove"
           autofocus="autofocus"
@@ -37,25 +37,26 @@ export default {
       type: String,
       default: ""
     },
-    errorText: {
-      type: String,
-      default: ""
-    },
     blocked: Boolean,
     editModeByDefault: Boolean
   },
   data() {
     return {
       editmode: this.editModeByDefault,
-      title: this.value
+      title: this.value,
+      errorMessage: ""
     };
   },
   methods: {
     onApprove() {
-      if (this.title.trim() === this.value.trim()) {
+      this.errorMessage = "";
+      if (this.value.trim() === "") {
+        this.errorMessage = "Поле должно быть заполнено";
+      } else if (this.title.trim() === this.value.trim()) {
         this.editmode = false;
       } else {
         this.$emit("approve", this.value);
+        this.editmode = false;
       }
     }
   },

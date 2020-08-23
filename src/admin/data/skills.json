@@ -1,51 +1,51 @@
 [
   {
-    "id": 1,
+    "id": 0,
     "category": "Front-end",
     "skills": [
       {
-        "id": 1,
+        "id": 0,
         "title": "HTML5",
         "percent": 70
       },
       {
-        "id": 2,
+        "id": 1,
         "title": "CSS3",
         "percent": 60
       },
       {
-        "id": 3,
+        "id": 2,
         "title": "Javascript",
         "percent": 40
       },
       {
-        "id": 4,
+        "id": 3,
         "title": "Jquery и Vue.js",
         "percent": 30
       }
     ]
   },
   {
-    "id": 2,
+    "id": 1,
     "category": "Workflow",
     "skills": [
       {
-        "id": 1,
+        "id": 0,
         "title": "GIT",
         "percent": 30
       },
       {
-        "id": 2,
+        "id": 1,
         "title": "Terminal",
         "percent": 25
       },
       {
-        "id": 3,
+        "id": 2,
         "title": "Gulp",
         "percent": 45
       },
       {
-        "id": 4,
+        "id": 3,
         "title": "Webpack",
         "percent": 15
       }

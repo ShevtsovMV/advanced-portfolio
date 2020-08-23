@@ -4,20 +4,25 @@
       slot="title" 
       v-model="categoryTitle" 
       :editModeByDefault="empty" 
-      @remove="$emit('remove', $event)"
+      @remove="$emit('remove-category-title', $event)"
+      @approve="$emit('approve-category-title', $event, categoryIndex)"
     />
     <template slot="content">
       <ul class="skills" v-if="empty === false">
-        <li class="item" v-for="skill in skills" :key="skill.id">
+        <li class="item" v-for="(skill, index) in skills" :key="skill.id">
           <skill 
             :skill="skill" 
-            @remove="$emit('remove-skill', $event)"
-            @approve="$emit('edit-skill', $event)"
+            :skillIndex="index"
+            @remove="$emit('remove-skill', $event, categoryIndex)"
+            @approve="$emit('edit-skill', $event, categoryIndex)"
           />
         </li>
       </ul>
       <div class="bottom-line">
-        <skill-add-line :blocked="empty" />
+        <skill-add-line 
+          :blocked="empty" 
+          @add-skill="$emit('add-skill', $event, categoryIndex)"
+        />
       </div>
     </template>
   </card>
@@ -45,7 +50,11 @@ export default {
     skills: {
       type: Array,
       default: () => []
-    }
+    },
+    categoryIndex: {
+      type: Number,
+      default: 0
+    },
   },
   data() {
     return {
