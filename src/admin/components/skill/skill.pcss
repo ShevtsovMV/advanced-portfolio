@@ -1,0 +1,43 @@
+@import "../../../styles/mixins.pcss";
+
+.skill-component {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  width: 45%;
+  margin-right: auto;
+}
+
+.percent {
+  position: relative;
+  text-align: center;
+  width: 75px;
+  margin-right: 50px;
+  padding-right: 16px;
+
+  &:after {
+    content: "%";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+  }
+
+  @include tablets {
+    margin-right: 30px;
+  }
+}
+
+.buttons {
+  display: flex;
+}
+
+.btn {
+  margin-right: 20px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}

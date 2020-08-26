@@ -1,0 +1,24 @@
+.list {
+  display: flex;
+  padding: 4px 0;
+}
+
+.link {
+  display: block;
+  font-weight: 600;
+  padding: 26px;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+
+  &:hover {
+    color: $admin-main-color;
+    border-bottom: 3px solid $admin-main-color;
+  }
+}
+
+.item.active {
+  .link {
+    color: $admin-main-color;
+    border-bottom: 3px solid $admin-main-color;
+  }
+}

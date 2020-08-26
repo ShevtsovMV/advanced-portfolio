@@ -15,6 +15,25 @@ export const defaultView = () => ({
 defaultView.story = {
   name: "Стандартный вид",
   parameters: {
+    backgrounds: {
+      default: 'grey',
+      values: [
+        { name: 'grey', value: '#8395a7' },
+      ],
+    },
+  },
+};
+
+export const interactiveView = () => ({
+  components: { tag },
+  template: `
+    <tag title="tag" interactive />
+  `
+});
+
+interactiveView.story = {
+  name: "С контролом",
+  parameters: {
     backgrounds: [
       { name: 'grey', value: '#8395a7', default: true },
     ],

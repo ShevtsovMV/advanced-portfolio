@@ -1,0 +1,19 @@
+@import "../../../styles/mixins.pcss";
+
+.item {
+  margin-bottom: 16px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.bottom-line {
+  padding-top: 60px;
+  padding-left: 20%;
+  margin-top: auto;
+
+  @include tablets {
+    padding-left: 0;
+  }
+}
