@@ -31,6 +31,7 @@
               :skills="category.skills"
               :categoryIndex="index"
               @approve-category-title="onApproveCategoryTitle"
+              @remove-category-title="removeCategory"
               @edit-skill="editSkill"
               @remove-skill="removeSkill"
               @add-skill="addSkill"
@@ -92,14 +93,18 @@
         this.categories[categoryIndex].category = categoryTitle;
       },
       createNewCategory(categoryTitle, categoryIndex) {
+        let newObjId = (this.categories.length == 0) ? 0 : (this.categories[0].id - 1);
         const newObj = {
-          "id": this.categories[0].id - 1,
+          "id": newObjId,
           "category": categoryTitle,
           "skills": []
         };
         this.categories.unshift(newObj);
         this.emptyCatIsShow = false;
-      }
+      },
+      removeCategory(categoryTitle, categoryIndex) {
+        this.categories.splice(categoryIndex, 1);
+      },
     },
     created() {
       this.categories = require("./data/skills.json");

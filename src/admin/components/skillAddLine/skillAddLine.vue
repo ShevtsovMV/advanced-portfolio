@@ -43,6 +43,8 @@ export default {
       if (this.currentSkill.title.trim() !== "" && this.currentSkill.percent !== "") {
         this.$emit('add-skill', this.currentSkill);
         this.errorMessage = "";
+        this.currentSkill.title = "";
+        this.currentSkill.percent= 0;
       } else {
         this.errorMessage = "Не все поля заполнены";
       }
