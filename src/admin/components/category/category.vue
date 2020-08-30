@@ -5,23 +5,22 @@
       v-model="categoryTitle" 
       :editModeByDefault="empty" 
       @remove="$emit('remove-category-title', $event, categoryIndex)"
-      @approve="$emit('approve-category-title', $event, categoryIndex)"
+      @approve="$emit('approve-category-title', $event)"
     />
     <template slot="content">
       <ul class="skills" v-if="empty === false">
-        <li class="item" v-for="(skill, index) in skills" :key="skill.id">
+        <li class="item" v-for="(skill) in skills" :key="skill.id">
           <skill 
             :skill="skill" 
-            :skillIndex="index"
-            @remove="$emit('remove-skill', $event, categoryIndex)"
-            @approve="$emit('edit-skill', $event, categoryIndex)"
+            @remove="$emit('remove-skill', $event)"
+            @approve="$emit('edit-skill', $event)"
           />
         </li>
       </ul>
       <div class="bottom-line">
         <skill-add-line 
           :blocked="empty" 
-          @add-skill="$emit('add-skill', $event, categoryIndex)"
+          @add-skill="$emit('add-skill', $event)"
         />
       </div>
     </template>

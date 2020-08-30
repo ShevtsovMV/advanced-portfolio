@@ -13,11 +13,12 @@
         </div>
       </div>
       <div class="container-page-content">
+        <pre>{{categories}}</pre>
         <ul class="skills">
           <li class="item" v-if="emptyCatIsShow">
             <category 
               @remove-category-title="emptyCatIsShow = false"
-              @approve-category-title="createNewCategory"
+              @approve-category-title="createCategory"
               empty 
             />
           </li>
@@ -30,7 +31,7 @@
               @remove-category-title="removeCategory"
               @edit-skill="editSkill"
               @remove-skill="removeSkill"
-              @add-skill="addSkill"
+              @add-skill="addSkill($event, category.id)"
             />
           </li>
         </ul>
@@ -42,6 +43,7 @@
 <script>
   import button from "../../components/button/button";
   import category from "../../components/category/category";
+  import { mapActions, mapState } from "vuex";
 
   export default {
     components: {
@@ -50,54 +52,55 @@
     },
     data() {
       return {
-        categories: [],
         emptyCatIsShow: false
       };
     },
+    computed: {
+      ...mapState("categories", {
+        categories: state => state.data
+      }),
+    },
     methods: {
-      editSkill(e, categoryIndex) {
-        const newObj = {
-          "id": e.id,
-          "title": e.title,
-          "percent": e.percent
-        };
-        this.categories[categoryIndex].skills.splice(e.id, 1, newObj);
+      ...mapActions({
+        createCategoryAction: "categories/create",
+        fetchCategoryAction: "categories/fetch",
+        addSkillAction: "skills/add",
+        removeSkillAction: "skills/remove",
+        editSkillAction: "skills/edit",
+      }),
+      async editSkill(skill) {
+        await this.editSkillAction(skill);
+        skill.editmode = false;
       },
-      removeSkill(skillIndex, categoryIndex) {
-        this.categories[categoryIndex].skills.splice(skillIndex, 1);
+      removeSkill(skill) {
+        this.removeSkillAction(skill);
       },
-      addSkill(e, categoryIndex) {
-        const arr = this.categories[categoryIndex].skills;
-        const arrLength = arr.length;
-        const lastArrElem = arr[arrLength - 1];
-        let newObjId = (arrLength == 0) ? 0 : (lastArrElem.id + 1);
-        const newObj = {
-          "id": newObjId,
-          "title": e.title,
-          "percent": e.percent
+      async addSkill(skill, categoryId) {
+        const newSkill = {
+          ...skill,
+          category: categoryId
         };
-        this.categories[categoryIndex].skills.push(newObj);
-
+        await this.addSkillAction(newSkill);
+        skill.title = "";
+        skill.percent = "";
       },
       onApproveCategoryTitle(categoryTitle, categoryIndex) {
         this.categories[categoryIndex].category = categoryTitle;
       },
-      createNewCategory(categoryTitle, categoryIndex) {
-        let newObjId = (this.categories.length == 0) ? 0 : (this.categories[0].id - 1);
-        const newObj = {
-          "id": newObjId,
-          "category": categoryTitle,
-          "skills": []
-        };
-        this.categories.unshift(newObj);
-        this.emptyCatIsShow = false;
+      async createCategory(categoryTitle, categoryIndex) {
+        try {
+          await this.createCategoryAction(categoryTitle);
+          this.emptyCatIsShow = false;
+        } catch (error) {
+          console.log(error.message);
+        }
       },
       removeCategory(categoryTitle, categoryIndex) {
         this.categories.splice(categoryIndex, 1);
       },
     },
     created() {
-      this.categories = require("../../data/skills.json");
+      this.fetchCategoryAction();
     },
     mounted() {
 
