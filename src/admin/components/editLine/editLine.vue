@@ -11,7 +11,7 @@
         <app-input
           placeholder="Название новой группы"
           :value="value"
-          :errorMessage="errorMessage"
+          :errorMessage="validation.firstError('value')"
           @input="$emit('input', $event)"
           @keydown.native.enter="onApprove"
           autofocus="autofocus"
@@ -31,7 +31,15 @@
 </template>
 
 <script>
+import { Validator, mixin as ValidatorMixin } from "simple-vue-validator";
+
 export default {
+  mixins: [ValidatorMixin],
+  validators: {
+    "value": value => {
+      return Validator.value(value).required("Не может быть пустым");
+    },
+  },
   props: {
     value: {
       type: String,
@@ -48,17 +56,15 @@ export default {
     };
   },
   methods: {
-    onApprove() {
-      this.errorMessage = "";
-      if (this.value.trim() === "") {
-        this.errorMessage = "Поле должно быть заполнено";
-      } else if (this.title.trim() === this.value.trim()) {
+    async onApprove() {
+      if ((await this.$validate()) === false) return;
+      if (this.title.trim() === this.value.trim()) {
         this.editmode = false;
-      } else {
-        this.$emit("approve", this.value);
-        this.editmode = false;
+        return;
       }
-    }
+      this.$emit("approve", this.value);
+      this.editmode = false;
+    },
   },
   components: {
     icon: () => import("components/icon"),

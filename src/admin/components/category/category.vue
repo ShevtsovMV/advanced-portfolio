@@ -4,8 +4,8 @@
       slot="title" 
       v-model="categoryTitle" 
       :editModeByDefault="empty" 
-      @remove="$emit('remove-category-title', $event, categoryIndex)"
-      @approve="$emit('approve-category-title', $event)"
+      @remove="$emit('remove-category-title', $event, categoryId)"
+      @approve="$emit('approve-category-title', $event, categoryId)"
     />
     <template slot="content">
       <ul class="skills" v-if="empty === false">
@@ -50,7 +50,7 @@ export default {
       type: Array,
       default: () => []
     },
-    categoryIndex: {
+    categoryId: {
       type: Number,
       default: 0
     },

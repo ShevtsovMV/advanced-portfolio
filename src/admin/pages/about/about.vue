@@ -12,6 +12,7 @@
           />
         </div>
       </div>
+      <pre>{{categories}}</pre>
       <div class="container-page-content">
         <ul class="skills">
           <li class="item" v-if="emptyCatIsShow">
@@ -21,12 +22,12 @@
               empty 
             />
           </li>
-          <li class="item" v-for="(category, index) in categories" :key="category.id">
+          <li class="item" v-for="(category) in categories" :key="category.id">
             <category 
               :title="category.category"
               :skills="category.skills"
-              :categoryIndex="index"
-              @approve-category-title="onApproveCategoryTitle"
+              :categoryId="category.id"
+              @approve-category-title="editCategoryTitle"
               @remove-category-title="removeCategory"
               @edit-skill="editSkill"
               @remove-skill="removeSkill"
@@ -62,6 +63,8 @@
     methods: {
       ...mapActions({
         createCategoryAction: "categories/create",
+        editCategoryTitleAction: "categories/edit",
+        removeCategoryAction: "categories/remove",
         fetchCategoryAction: "categories/fetch",
         addSkillAction: "skills/add",
         removeSkillAction: "skills/remove",
@@ -83,10 +86,10 @@
         skill.title = "";
         skill.percent = "";
       },
-      onApproveCategoryTitle(categoryTitle, categoryIndex) {
-        this.categories[categoryIndex].category = categoryTitle;
+      editCategoryTitle(categoryTitle, categoryId) {
+        this.editCategoryTitleAction({categoryTitle, categoryId});
       },
-      async createCategory(categoryTitle, categoryIndex) {
+      async createCategory(categoryTitle) {
         try {
           await this.createCategoryAction(categoryTitle);
           this.emptyCatIsShow = false;
@@ -94,8 +97,8 @@
           console.log(error.message);
         }
       },
-      removeCategory(categoryTitle, categoryIndex) {
-        this.categories.splice(categoryIndex, 1);
+      removeCategory(e, categoryId) {
+        this.removeCategoryAction(categoryId);
       },
     },
     created() {
