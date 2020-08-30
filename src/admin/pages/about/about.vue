@@ -12,7 +12,6 @@
           />
         </div>
       </div>
-      <pre>{{categories}}</pre>
       <div class="container-page-content">
         <ul class="skills">
           <li class="item" v-if="emptyCatIsShow">
@@ -69,44 +68,104 @@
         addSkillAction: "skills/add",
         removeSkillAction: "skills/remove",
         editSkillAction: "skills/edit",
+        showTooltip: "tooltips/show",
       }),
       async editSkill(skill) {
-        await this.editSkillAction(skill);
-        skill.editmode = false;
+        try {
+          await this.editSkillAction(skill);
+          skill.editmode = false;
+          this.showTooltip({
+          text: "Навык изменен",
+          type: "success",
+        });
+        } catch (error) {
+          this.showTooltip({
+          text: error.message,
+          type: "error",
+        });
+        }
       },
-      removeSkill(skill) {
-        this.removeSkillAction(skill);
+      async removeSkill(skill) {
+        try {
+          await this.removeSkillAction(skill);
+          this.showTooltip({
+          text: "Навык удален",
+          type: "success",
+        });
+        } catch (error) {
+          this.showTooltip({
+          text: error.message,
+          type: "error",
+        });
+        }
       },
       async addSkill(skill, categoryId) {
         const newSkill = {
           ...skill,
           category: categoryId
         };
-        await this.addSkillAction(newSkill);
-        skill.title = "";
-        skill.percent = "";
+        try {
+          await this.addSkillAction(newSkill);
+          skill.title = "";
+          skill.percent = "";
+          this.showTooltip({
+          text: "Навык добавлен",
+          type: "success",
+        });
+        } catch (error) {
+          this.showTooltip({
+          text: error.message,
+          type: "error",
+        });
+        }
       },
-      editCategoryTitle(categoryTitle, categoryId) {
-        this.editCategoryTitleAction({categoryTitle, categoryId});
+      async editCategoryTitle(categoryTitle, categoryId) {
+        try {
+          await this.editCategoryTitleAction({categoryTitle, categoryId});
+          this.showTooltip({
+          text: "Заголовок категории изменен",
+          type: "success",
+        });
+        } catch (error) {
+          this.showTooltip({
+          text: error.message,
+          type: "error",
+        });
+        }
       },
       async createCategory(categoryTitle) {
         try {
           await this.createCategoryAction(categoryTitle);
           this.emptyCatIsShow = false;
+          this.showTooltip({
+          text: "Новая категория создана",
+          type: "success",
+        });
         } catch (error) {
-          console.log(error.message);
+          this.showTooltip({
+          text: error.message,
+          type: "error",
+        });
         }
       },
-      removeCategory(e, categoryId) {
-        this.removeCategoryAction(categoryId);
+      async removeCategory(e, categoryId) {
+        try {
+          await this.removeCategoryAction(categoryId);
+          this.showTooltip({
+          text: "Категория удалена",
+          type: "success",
+        });
+        } catch (error) {
+          this.showTooltip({
+          text: error.message,
+          type: "error",
+        });
+        }
       },
     },
     created() {
       this.fetchCategoryAction();
     },
-    mounted() {
-
-    }
   };
 </script>
 

@@ -58,7 +58,7 @@ export default {
           skills: []
         });
       } catch (error) {
-        throw new Error("произошла ошибка");
+        throw new Error(error.response.data.error);
       }
     },
     async fetch(store) {
@@ -74,7 +74,7 @@ export default {
         const response = await this.$axios.post(`/categories/${categoryId}`, {title: categoryTitle});
         store.commit("EDIT_TITLE", response.data);
       } catch (error) {
-        throw new Error("произошла ошибка");
+        throw new Error(error.response.data.error);
       }
     },
     async remove(store, categoryId) {
@@ -82,7 +82,7 @@ export default {
         const response = await this.$axios.delete(`/categories/${categoryId}`);
         store.commit("REMOVE_CATEGORY", categoryId);
       } catch (error) {
-        throw new Error("произошла ошибка");
+        throw new Error(error.response.data.error);
       }
     },
   },

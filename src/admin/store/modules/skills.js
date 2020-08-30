@@ -6,7 +6,7 @@ export default {
         const response = await this.$axios.post("/skills", skill);
         store.commit("categories/ADD_SKILL", response.data, { root: true });
       } catch (error) {
-        throw new Error("произошла ошибка");
+        throw new Error(error.response.data.error);
       }
     },
     async remove(store, skillToRemove) {
@@ -14,7 +14,7 @@ export default {
         const response = await this.$axios.delete(`/skills/${skillToRemove.id}`);
         store.commit("categories/REMOVE_SKILL", skillToRemove, { root: true });
       } catch (error) {
-        throw new Error("произошла ошибка");
+        throw new Error(error.response.data.error);
       }
     },
     async edit(store, skillToEdit) {
@@ -22,7 +22,7 @@ export default {
         const response = await this.$axios.post(`/skills/${skillToEdit.id}`, skillToEdit);
         store.commit("categories/EDIT_SKILL", response.data.skill, { root: true });
       } catch (error) {
-        throw new Error("произошла ошибка");
+        throw new Error(error.response.data.error);
       }
     },
   },
