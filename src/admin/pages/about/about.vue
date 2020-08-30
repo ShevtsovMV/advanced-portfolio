@@ -13,7 +13,6 @@
         </div>
       </div>
       <div class="container-page-content">
-        <pre>{{categories}}</pre>
         <ul class="skills">
           <li class="item" v-if="emptyCatIsShow">
             <category 

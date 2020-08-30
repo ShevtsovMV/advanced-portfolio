@@ -6,57 +6,19 @@
   flex-direction: column;
 }
 
-.container-page-content {
-  margin: 0 auto;
-  width: 95%;
+.notify-container {
+  position: fixed;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
 
-  @include phones {
-    width: 100%;
+  &.active {
+    .notification {
+      transform: translateY(-100%);
+    }
   }
 }
 
-.page-content {
-  flex: 1;
-  background: url("../images/bg/admin.png") center center / cover no-repeat;
-  padding: 54px 0 30px;
-
-  @include phones {
-    padding: 30px 0;
-  }
-}
-
-.header {
-  display: flex;
-  margin-bottom: 54px;
-
-  @include phones {
-    flex-direction: column;
-    margin-bottom: 40px;
-  }
-}
-
-.title {
-  font-size: 21px;
-  font-weight: bold;
-  margin-right: 54px;
-
-  @include phones {
-    margin-right: 0;
-    margin-bottom: 26px;
-  }
-}
-
-.skills {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.item {
-  width: calc((100% - 24px) / 2);
-  margin-bottom: 24px;
-
-  @include phones {
-    width: 100%;
-  }
+.notification {
+  transition: transform 0.3s;
 }
