@@ -3,15 +3,20 @@
     <div class="title">
       <app-input 
         v-model="currentSkill.title" 
-        :errorMessage="errorMessage"
+        :errorMessage="validation.firstError('currentSkill.title')"
         placeholder="Новый навык" 
       />
     </div>
     <div class="percent">
-      <app-input v-model="currentSkill.percent" type="number" min="0" max="100" maxlength="3" />
+      <app-input 
+      v-model="currentSkill.percent"
+      :errorMessage="validation.firstError('currentSkill.percent')"
+      type="number" 
+      min="0" max="100" maxlength="3" 
+      />
     </div>
     <div class="button">
-      <round-button type="round"  @click="onApprove" />
+      <round-button type="round"  @click="handleClick" />
     </div>
   </div>
 </template>
@@ -19,17 +24,26 @@
 <script>
 import input from "../input";
 import button from "../button";
+import { Validator, mixin as ValidatorMixin } from "simple-vue-validator";
 
 export default {
+  mixins: [ValidatorMixin],
+  validators: {
+    "currentSkill.title": value => {
+      return Validator.value(value).required("Не может быть пустым");
+    },
+    "currentSkill.percent": value => {
+      return Validator.value(value).integer("Введите число").between(0, 100, "Число должно быть между 0 и 100").required("Не может быть пустым");
+    },
+  },
   props: {
     blocked: Boolean
   },
   data() {
     return {
       currentSkill: {
-        id: 0,
         title: "",
-        percent: 0
+        percent: ""
       },
       errorMessage: ""
     };
@@ -39,15 +53,10 @@ export default {
     roundButton: button,
   },
   methods: {
-    onApprove() {
-      if (this.currentSkill.title.trim() !== "" && this.currentSkill.percent !== "") {
-        this.$emit('add-skill', this.currentSkill);
-        this.errorMessage = "";
-        this.currentSkill.title = "";
-        this.currentSkill.percent= 0;
-      } else {
-        this.errorMessage = "Не все поля заполнены";
-      }
+    async handleClick() {
+      if ((await this.$validate()) === false) return;
+      
+      this.$emit('add-skill', this.currentSkill);
     },
   }
 };

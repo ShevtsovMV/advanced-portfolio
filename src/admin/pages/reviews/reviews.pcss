@@ -1,0 +1,23 @@
+@import "../../../styles/mixins.pcss";
+
+.header {
+  display: flex;
+  margin-bottom: 54px;
+
+  @include phones {
+    flex-direction: column;
+    margin-bottom: 40px;
+  }
+}
+
+.title {
+  font-size: 21px;
+  font-weight: bold;
+  margin-right: 54px;
+
+  @include phones {
+    margin-right: 0;
+    margin-bottom: 26px;
+  }
+}
+
