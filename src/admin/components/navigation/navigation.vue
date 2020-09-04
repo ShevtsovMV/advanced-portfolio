@@ -6,8 +6,6 @@
           v-for="link in links" 
           :class="['item', {active: link.active}]" 
           :key="link.id">
-          <!-- <a class="link" :href="`/${link.alias}`">{{link.title}}</a> -->
-          <!-- router-link(class="tabs__link" active-class="tabs__link--active" exact to="/") Обо мне -->
           <router-link class="link" exact :to="link.alias">{{link.title}}</router-link>
         </li>
       </ul>
