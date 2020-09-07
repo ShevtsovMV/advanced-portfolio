@@ -23,15 +23,28 @@
               <div class="form-row">
                 <div class="user-info">
                   <div class="user-info-col">
-                    <app-input v-model="newReview.author" title="Имя автора" />
+                    <app-input
+                      v-model="newReview.author"
+                      :errorMessage="validation.firstError('newReview.author')"
+                      title="Имя автора"
+                    />
                   </div>
                   <div class="user-info-col">
-                    <app-input v-model="newReview.occ" title="Титул автора" />
+                    <app-input
+                      v-model="newReview.occ"
+                      :errorMessage="validation.firstError('newReview.occ')"
+                      title="Титул автора"
+                    />
                   </div>
                 </div>
               </div>
               <div class="form-row">
-                <app-input v-model="newReview.text" field-type="textarea" title="Отзыв" />
+                <app-input
+                  v-model="newReview.text"
+                  :errorMessage="validation.firstError('newReview.text')"
+                  field-type="textarea"
+                  title="Отзыв"
+                />
               </div>
             </div>
           </div>
@@ -54,15 +67,29 @@ import card from "../Card";
 import appButton from "../button";
 import appInput from "../input";
 import { mapActions } from "vuex";
+import { Validator, mixin as ValidatorMixin } from "simple-vue-validator";
 
 export default {
   components: { card, appButton, appInput },
+  mixins: [ValidatorMixin],
+  validators: {
+    "newReview.author": value => {
+      return Validator.value(value).required("Не может быть пустым");
+    },
+    "newReview.occ": value => {
+      return Validator.value(value).required("Не может быть пустым");
+    },
+    "newReview.text": value => {
+      return Validator.value(value).required("Не может быть пустым");
+    },
+  },
   props: {
     newReview: Object,
   },
   data() {
     return {
       hovered: false,
+      errorMessage: "",
     };
   },
   methods: {
@@ -78,6 +105,7 @@ export default {
       this.hovered = true;
     },
     async handleSubmit() {
+      if ((await this.$validate()) === false) return;
       if (this.newReview.id) {
         await this.updateReviewAction(this.newReview);
       } else {

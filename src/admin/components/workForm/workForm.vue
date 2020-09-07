@@ -22,16 +22,32 @@
             </div>
             <div class="form-col">
               <div class="form-row">
-                <app-input v-model="newWork.title" title="Название" />
+                <app-input
+                  v-model="newWork.title"
+                  :errorMessage="validation.firstError('newWork.title')"
+                  title="Название"
+                />
               </div>
               <div class="form-row">
-                <app-input v-model="newWork.link" title="Ссылка" />
+                <app-input
+                  v-model="newWork.link"
+                  :errorMessage="validation.firstError('newWork.link')"
+                  title="Ссылка"
+                />
               </div>
               <div class="form-row">
-                <app-input v-model="newWork.description" field-type="textarea" title="Описание" />
+                <app-input
+                  v-model="newWork.description"
+                  :errorMessage="validation.firstError('newWork.description')"
+                  field-type="textarea"
+                  title="Описание"
+                />
               </div>
               <div class="form-row">
-                <tags-adder v-model="newWork.techs" />
+                <tags-adder
+                  v-model="newWork.techs"
+                  :errorMessage="validation.firstError('newWork.techs')"
+                />
               </div>
             </div>
           </div>
@@ -55,15 +71,32 @@ import appButton from "../button";
 import appInput from "../input";
 import tagsAdder from "../tagsAdder";
 import { mapActions } from "vuex";
+import { Validator, mixin as ValidatorMixin } from "simple-vue-validator";
 
 export default {
   components: { card, appButton, appInput, tagsAdder },
+  mixins: [ValidatorMixin],
+  validators: {
+    "newWork.title": value => {
+      return Validator.value(value).required("Не может быть пустым");
+    },
+    "newWork.link": value => {
+      return Validator.value(value).required("Не может быть пустым").url("Введите валидную ссылку");
+    },
+    "newWork.description": value => {
+      return Validator.value(value).required("Не может быть пустым");
+    },
+    "newWork.techs": value => {
+      return Validator.value(value).required("Не может быть пустым");
+    },
+  },
   props: {
     newWork: Object,
   },
   data() {
     return {
       hovered: false,
+      errorMessage: "",
     };
   },
   methods: {
@@ -79,6 +112,7 @@ export default {
       this.hovered = true;
     },
     async handleSubmit() {
+      if ((await this.$validate()) === false) return;
       if (this.newWork.id) {
         await this.updateWorkAction(this.newWork);
       } else {

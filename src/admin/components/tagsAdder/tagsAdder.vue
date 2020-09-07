@@ -3,6 +3,7 @@
     <app-input
       title="Добавление тега"
       v-model="currentTags"
+      :errorMessage="errorMessage"
       @input="$emit('change', currentTags)"
     />
     <ul class="tags">
@@ -33,6 +34,10 @@ export default {
   },
   props: {
     tags: {
+      type: String,
+      default: ""
+    },
+    errorMessage:{
       type: String,
       default: ""
     }
