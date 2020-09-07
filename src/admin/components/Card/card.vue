@@ -20,7 +20,10 @@ export default {
       type: String,
       default: "" 
     },
-    simple: Boolean
+    simple: {
+      type: Boolean,
+      default: false
+    },
   }
 };
 </script>

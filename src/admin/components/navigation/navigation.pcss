@@ -1,24 +1,41 @@
 .list {
   display: flex;
-  padding: 4px 0;
 }
 
 .link {
-  display: block;
+  padding: 30px;
+  font-size: 16px;
   font-weight: 600;
-  padding: 26px;
-  border-bottom: 3px solid transparent;
-  white-space: nowrap;
+  display: block;
+  text-decoration: none;
+
+  &.active {
+    color: #383bcf;
+    position: relative;
+
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #383bcf;
+    }
+  }
 
   &:hover {
-    color: $admin-main-color;
-    border-bottom: 3px solid $admin-main-color;
-  }
-}
+    color: #383bcf;
+    position: relative;
 
-.item.active {
-  .link {
-    color: $admin-main-color;
-    border-bottom: 3px solid $admin-main-color;
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #383bcf;
+    }
   }
 }

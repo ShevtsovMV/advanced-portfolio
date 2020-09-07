@@ -16,7 +16,8 @@ export default {
       validator: value => ["pencil", "cross", "tick", "trash"].includes(value)
     },
     grayscale: {
-      type: Boolean
+      type: Boolean,
+      default: false
     },
     title: {
       type: String,

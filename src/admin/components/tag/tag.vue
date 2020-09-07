@@ -21,7 +21,10 @@ export default {
       type: String,
       default: ""
     },
-    interactive: Boolean
+    interactive: {
+      type: Boolean,
+      default: false
+    },
   },
   components: {
     icon

@@ -10,7 +10,6 @@
         class="tag"
         v-for="(tag, index) in tagsArray"
         :key="`${tag}${index}`"
-        
       >
         <tag 
           interactive 
@@ -50,7 +49,7 @@ export default {
   computed: {
     tagsArray() {
       return this.getArrayFromString(this.currentTags);
-    }
+    },
   },
   methods: {
     removeTag(tag) {
@@ -74,7 +73,7 @@ export default {
       }
       return arr;
     }
-  }
+  },
 }
 </script>
 
