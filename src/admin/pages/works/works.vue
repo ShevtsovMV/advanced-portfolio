@@ -64,9 +64,21 @@
       ...mapActions({
         fetchWorksAction: "works/fetch",
         deleteWorkAction: "works/delete",
+        showTooltip: "tooltips/show",
       }),
-      deleteWork (workId) {
-        this.deleteWorkAction(workId);
+      async deleteWork (workId) {
+        try {
+          await this.deleteWorkAction(workId);
+          this.showTooltip({
+            text: "Работа удалена",
+            type: "success",
+          });
+        } catch (error) {
+          this.showTooltip({
+            text: error.message,
+            type: "error",
+          });
+        }
       },
       editWork(work) {
         this.newWork = {...work,

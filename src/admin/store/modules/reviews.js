@@ -37,7 +37,7 @@ export default {
         const { data } = await this.$axios.post("/reviews", formData);
         commit("ADD_REVIEW", data);
       } catch (error) {
-        console.log("error");
+        throw new Error(error.response.data.message);
       }
     },
     async update ({ commit }, review) {
@@ -53,7 +53,7 @@ export default {
         const { data } = await this.$axios.post(`/reviews/${updateReview.id}`, formData);
         commit("UPDATE_REVIEW", data);
       } catch (error) {
-        console.log("error");
+        throw new Error(error.response.data.message);
       }
     },
     async fetch({commit}) {
@@ -71,7 +71,7 @@ export default {
         await this.$axios.delete(`/reviews/${reviewToDelete}`);
         context.commit('DELETE_REVIEW', reviewToDelete);
       } catch (error) {
-        console.log("error");
+        throw new Error(error.response.data.message);
       }
     },
   },

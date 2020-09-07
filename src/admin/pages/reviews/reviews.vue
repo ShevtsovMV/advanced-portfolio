@@ -63,9 +63,21 @@
       ...mapActions({
         fetchReviewsAction: "reviews/fetch",
         deleteReviewAction: "reviews/delete",
+        showTooltip: "tooltips/show",
       }),
-      deleteReview (reviewId) {
-        this.deleteReviewAction(reviewId);
+      async deleteReview (reviewId) {
+        try {
+          await this.deleteReviewAction(reviewId);
+          this.showTooltip({
+            text: "Работа удалена",
+            type: "success",
+          });
+        } catch (error) {
+          this.showTooltip({
+            text: error.message,
+            type: "error",
+          });
+        }
       },
       editReview(review) {
         this.newReview = {...review,

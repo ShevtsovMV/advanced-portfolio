@@ -103,6 +103,7 @@ export default {
     ...mapActions({
       addNewWorkAction: "works/add",
       updateWorkAction: "works/update",
+      showTooltip: "tooltips/show",
     }),
     hideAddingCard() {
       this.$emit("hideAddingCard");
@@ -114,11 +115,34 @@ export default {
     async handleSubmit() {
       if ((await this.$validate()) === false) return;
       if (this.newWork.id) {
-        await this.updateWorkAction(this.newWork);
+        try {
+          await this.updateWorkAction(this.newWork);
+          this.$emit("hideAddingCard");
+          this.showTooltip({
+            text: "Работа обновлена",
+            type: "success",
+          });
+        } catch (error) {
+          this.showTooltip({
+            text: error.message,
+            type: "error",
+          });
+        }
       } else {
-        await this.addNewWorkAction(this.newWork);
+        try {
+          await this.addNewWorkAction(this.newWork);
+          this.$emit("hideAddingCard");
+          this.showTooltip({
+            text: "Работа добавлена",
+            type: "success",
+          });
+        } catch (error) {
+          this.showTooltip({
+            text: error.message,
+            type: "error",
+          });
+        }
       }
-      this.$emit("hideAddingCard");
     },
     handleChange(event) {
       event.preventDefault();

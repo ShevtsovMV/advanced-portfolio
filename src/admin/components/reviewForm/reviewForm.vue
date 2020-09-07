@@ -96,6 +96,7 @@ export default {
     ...mapActions({
       addNewReviewAction: "reviews/add",
       updateReviewAction: "reviews/update",
+      showTooltip: "tooltips/show",
     }),
     hideAddingCard() {
       this.$emit("hideAddingCard");
@@ -107,11 +108,35 @@ export default {
     async handleSubmit() {
       if ((await this.$validate()) === false) return;
       if (this.newReview.id) {
-        await this.updateReviewAction(this.newReview);
+        try {
+          await this.updateReviewAction(this.newReview);
+          this.$emit("hideAddingCard");
+          this.showTooltip({
+            text: "Отзыв обновлен",
+            type: "success",
+          });
+        } catch (error) {
+          console.log(error);
+          this.showTooltip({
+            text: error.message,
+            type: "error",
+          });
+        }
       } else {
-        await this.addNewReviewAction(this.newReview);
+        try {
+          await this.addNewReviewAction(this.newReview);
+          this.$emit("hideAddingCard");
+          this.showTooltip({
+            text: "Отзыв добавлен",
+            type: "success",
+          });
+        } catch (error) {
+          this.showTooltip({
+            text: error.message,
+            type: "error",
+          });
+        }
       }
-      this.$emit("hideAddingCard");
     },
     handleChange(event) {
       event.preventDefault();

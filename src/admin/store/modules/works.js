@@ -37,7 +37,7 @@ export default {
         const { data } = await this.$axios.post("/works", formData);
         commit("ADD_WORK", data);
       } catch (error) {
-        console.log("error");
+        throw new Error(error.response.data.message);
       }
     },
     async update ({ commit }, work) {
@@ -53,7 +53,7 @@ export default {
         const { data } = await this.$axios.post(`/works/${updateWork.id}`, formData);
         commit("UPDATE_WORK", data);
       } catch (error) {
-        console.log("error");
+        throw new Error(error.response.data.message);
       }
     },
     async fetch({commit}) {
@@ -71,7 +71,7 @@ export default {
         await this.$axios.delete(`/works/${workToDelete}`);
         context.commit('DELETE_WORK', workToDelete);
       } catch (error) {
-        console.log("error");
+        throw new Error(error.response.data.message);
       }
     },
   },
