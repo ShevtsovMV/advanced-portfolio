@@ -6,32 +6,32 @@
           <div class="form-cols">
             <div class="form-col">
               <label
-                :style="{backgroundImage: `url(${newWork.preview})`}"
-                :class="[ 'uploader', {active: newWork.preview}, {
+                :style="{backgroundImage: `url(${newReview.preview})`}"
+                :class="[ 'uploader', {active: newReview.preview}, {
                   hovered: hovered
                 }]"
                 @dragover="handleDragOver"
                 @dragleave="hovered = false"
                 @drop="handleChange"
               >
-                <div class="uploader-title">Перетащите или загрузите картинку</div>
                 <div class="uploader-btn">
-                  <app-button title="Загрузить" typeAttr="file" @change="handleChange"></app-button>
+                  <app-button title="Добавить фото" typeAttr="file" @change="handleChange" plain></app-button>
                 </div>
               </label>
             </div>
             <div class="form-col">
               <div class="form-row">
-                <app-input v-model="newWork.title" title="Название" />
+                <div class="user-info">
+                  <div class="user-info-col">
+                    <app-input v-model="newReview.author" title="Имя автора" />
+                  </div>
+                  <div class="user-info-col">
+                    <app-input v-model="newReview.occ" title="Титул автора" />
+                  </div>
+                </div>
               </div>
               <div class="form-row">
-                <app-input v-model="newWork.link" title="Ссылка" />
-              </div>
-              <div class="form-row">
-                <app-input v-model="newWork.description" field-type="textarea" title="Описание" />
-              </div>
-              <div class="form-row">
-                <tags-adder v-model="newWork.techs" />
+                <app-input v-model="newReview.text" field-type="textarea" title="Отзыв" />
               </div>
             </div>
           </div>
@@ -53,13 +53,12 @@
 import card from "../Card";
 import appButton from "../button";
 import appInput from "../input";
-import tagsAdder from "../tagsAdder";
 import { mapActions } from "vuex";
 
 export default {
-  components: { card, appButton, appInput, tagsAdder },
+  components: { card, appButton, appInput },
   props: {
-    newWork: Object,
+    newReview: Object,
   },
   data() {
     return {
@@ -68,8 +67,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      addNewWorkAction: "works/add",
-      updateWorkAction: "works/update",
+      addNewReviewAction: "reviews/add",
+      updateReviewAction: "reviews/update",
     }),
     hideAddingCard() {
       this.$emit("hideAddingCard");
@@ -79,10 +78,10 @@ export default {
       this.hovered = true;
     },
     async handleSubmit() {
-      if (this.newWork.id) {
-        await this.updateWorkAction(this.newWork);
+      if (this.newReview.id) {
+        await this.updateReviewAction(this.newReview);
       } else {
-        await this.addNewWorkAction(this.newWork);
+        await this.addNewReviewAction(this.newReview);
       }
       this.$emit("hideAddingCard");
     },
@@ -91,7 +90,7 @@ export default {
       const file = event.dataTransfer
         ? event.dataTransfer.files[0]
         : event.target.files[0];
-      this.newWork.photo = file;
+      this.newReview.photo = file;
       this.renderPhoto(file);
       this.hovered = false;
     },
@@ -99,11 +98,11 @@ export default {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = () => {
-        this.newWork.preview = reader.result;
+        this.newReview.preview = reader.result;
       };
     },
   },
 };
 </script>
 
-<style src="./workForm.pcss" lang="postcss" scoped></style>
+<style src="./reviewForm.pcss" lang="postcss" scoped></style>

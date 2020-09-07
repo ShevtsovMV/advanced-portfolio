@@ -75,17 +75,17 @@
         };
         this.showAddingCard = true;
       },
-      hideAddingCard () {
-      this.showAddingCard = false;
-      this.newWork = { ...{
-        title: "",
-        link: "",
-        description: "",
-        techs: "",
-        photo: {},
-        preview: "",
-      } }
-    },
+      hideAddingCard() {
+        this.showAddingCard = false;
+        this.newWork = { ...{
+          title: "",
+          link: "",
+          description: "",
+          techs: "",
+          photo: {},
+          preview: "",
+        } }
+      },
     },
     created() {
       this.fetchWorksAction();
