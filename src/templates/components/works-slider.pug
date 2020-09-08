@@ -1,14 +1,17 @@
 script(type="text/x-template")#works-slider-container
-  .works-slider
-    display(
-      :currentWork="currentWork"
-      :works="works"
-      :currentIndex="currentIndex"
-      @slide="slide"
-    )
-    info(
-      :currentWork="currentWork"
-    )
+  div(v-if="isDownloaded")
+    .works-slider
+      display(
+        :currentWork="currentWork"
+        :works="works"
+        :currentIndex="currentIndex"
+        @slide="slide"
+      )
+      info(
+        :currentWork="currentWork"
+      )
+  div(v-else)
+    h2 Загрузка...
 
 script(type="text/x-template")#works-slider-display
   .works-slider__pics(:data-slide="currentIndex + 1")
@@ -53,7 +56,7 @@ script(type="text/x-template")#works-slider-info
     )
     h3.works-slider__title {{currentWork.title}}
     .works-slider__desc
-      p {{currentWork.desc}}
+      p {{currentWork.description}}
     a.iconed-link(:href="currentWork.link" target="_blank") Посмотреть сайт
 
 script(type="text/x-template")#works-slider-tags
