@@ -20,6 +20,20 @@ const display = {
     thumbs,
     buttons
   },
+  methods: {
+    leave(el) {
+      el.classList.add("slide-out");
+    },
+    afterLeave(el) {
+      el.classList.remove("slide-out");
+    },
+    beforeEnter(el) {
+      el.classList.add("slide-in");
+    },
+    afterEnter(el) {
+      el.classList.remove("slide-in");
+    },
+  }
 };
 
 const tags = {
@@ -85,11 +99,12 @@ new Vue({
         case "prev" :
           this.currentIndex--;
           break;
-          default :
+        default :
           this.currentIndex = direction;
           break;
       }
-    }
+    },
+    
   },
   async created() {
     const {data} = await axios.get("works/373");
