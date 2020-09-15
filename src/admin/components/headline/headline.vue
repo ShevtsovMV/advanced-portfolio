@@ -4,19 +4,26 @@
       <slot />
       <div class="title">{{title}}</div>
       <div class="buttons">
-        <button class="btn" type="button">Выйти</button>
+        <button class="btn" type="button" @click="logout">Выйти</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   props: {
     title: {
       type: String,
       default: "Панель администрирования"
     }
+  },
+  methods: {
+    ...mapActions({
+      logout: "user/logout"
+    }),
   }
 }
 </script>

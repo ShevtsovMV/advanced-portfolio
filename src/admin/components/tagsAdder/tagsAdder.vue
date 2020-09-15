@@ -3,6 +3,7 @@
     <app-input
       title="Добавление тега"
       v-model="currentTags"
+      :errorMessage="errorMessage"
       @input="$emit('change', currentTags)"
     />
     <ul class="tags">
@@ -10,7 +11,6 @@
         class="tag"
         v-for="(tag, index) in tagsArray"
         :key="`${tag}${index}`"
-        
       >
         <tag 
           interactive 
@@ -36,6 +36,10 @@ export default {
     tags: {
       type: String,
       default: ""
+    },
+    errorMessage:{
+      type: String,
+      default: ""
     }
   },
   model: {
@@ -50,7 +54,7 @@ export default {
   computed: {
     tagsArray() {
       return this.getArrayFromString(this.currentTags);
-    }
+    },
   },
   methods: {
     removeTag(tag) {
@@ -74,7 +78,7 @@ export default {
       }
       return arr;
     }
-  }
+  },
 }
 </script>
 

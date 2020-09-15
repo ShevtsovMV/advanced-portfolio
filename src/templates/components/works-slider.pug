@@ -1,18 +1,29 @@
 script(type="text/x-template")#works-slider-container
-  .works-slider
-    display(
-      :currentWork="currentWork"
-      :works="works"
-      :currentIndex="currentIndex"
-      @slide="slide"
-    )
-    info(
-      :currentWork="currentWork"
-    )
+  div(v-if="isDownloaded")
+    .works-slider
+      display(
+        :currentWork="currentWork"
+        :works="works"
+        :currentIndex="currentIndex"
+        @slide="slide"
+      )
+      info(
+        :currentWork="currentWork"
+      )
+  div(v-else)
+    h2 Загрузка...
 
 script(type="text/x-template")#works-slider-display
   .works-slider__pics(:data-slide="currentIndex + 1")
-    img.works-slider__fullpic(:src="currentWork.photo", alt="")
+    transition-group.works-slider__transition-group(
+      tag="div"
+      name="slide"
+      @before-enter="beforeEnter"
+      @after-enter="afterEnter"
+      @leave="leave"
+      @after-leave="afterLeave"
+    )
+      img.works-slider__fullpic(:key="currentIndex + 1" :src="currentWork.photo", alt="")
     thumbs(
       :currentWork="currentWork"
       :works="works"
@@ -26,12 +37,12 @@ script(type="text/x-template")#works-slider-display
 script(type="text/x-template")#works-slider-thumbs
   ul.works-slider__thumbs
     li.works-slider__thumb-item(
-      v-for="slide in works" :key="slide.id"
+      v-for="(slide, index) in works" :key="slide.id"
       :class="{active: currentWork.id === slide.id}"
     )
       button.works-slider__thumb-btn(
         type="button"
-        @click="$emit('slide', slide.id)"
+        @click="$emit('slide', index)"
       )
         img.works-slider__thumb(:src="slide.photo")
 
@@ -53,7 +64,7 @@ script(type="text/x-template")#works-slider-info
     )
     h3.works-slider__title {{currentWork.title}}
     .works-slider__desc
-      p {{currentWork.desc}}
+      p {{currentWork.description}}
     a.iconed-link(:href="currentWork.link" target="_blank") Посмотреть сайт
 
 script(type="text/x-template")#works-slider-tags

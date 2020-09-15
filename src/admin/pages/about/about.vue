@@ -89,14 +89,14 @@
         try {
           await this.removeSkillAction(skill);
           this.showTooltip({
-          text: "Навык удален",
-          type: "success",
-        });
+            text: "Навык удален",
+            type: "success",
+          });
         } catch (error) {
           this.showTooltip({
-          text: error.message,
-          type: "error",
-        });
+            text: error.message,
+            type: "error",
+          });
         }
       },
       async addSkill(skill, categoryId) {
@@ -114,23 +114,23 @@
         });
         } catch (error) {
           this.showTooltip({
-          text: error.message,
-          type: "error",
-        });
+            text: error.message,
+            type: "error",
+          });
         }
       },
       async editCategoryTitle(categoryTitle, categoryId) {
         try {
           await this.editCategoryTitleAction({categoryTitle, categoryId});
           this.showTooltip({
-          text: "Заголовок категории изменен",
-          type: "success",
-        });
+            text: "Заголовок категории изменен",
+            type: "success",
+          });
         } catch (error) {
           this.showTooltip({
-          text: error.message,
-          type: "error",
-        });
+            text: error.message,
+            type: "error",
+          });
         }
       },
       async createCategory(categoryTitle) {
@@ -138,28 +138,28 @@
           await this.createCategoryAction(categoryTitle);
           this.emptyCatIsShow = false;
           this.showTooltip({
-          text: "Новая категория создана",
-          type: "success",
-        });
+            text: "Новая категория создана",
+            type: "success",
+          });
         } catch (error) {
           this.showTooltip({
-          text: error.message,
-          type: "error",
-        });
+            text: error.message,
+            type: "error",
+          });
         }
       },
       async removeCategory(e, categoryId) {
         try {
           await this.removeCategoryAction(categoryId);
           this.showTooltip({
-          text: "Категория удалена",
-          type: "success",
-        });
+            text: "Категория удалена",
+            type: "success",
+          });
         } catch (error) {
           this.showTooltip({
-          text: error.message,
-          type: "error",
-        });
+            text: error.message,
+            type: "error",
+          });
         }
       },
     },

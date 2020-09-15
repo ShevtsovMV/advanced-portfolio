@@ -60,6 +60,7 @@ export default {
   methods: {
     ...mapActions({
       showTooltip: "tooltips/show",
+      login: "user/login"
     }),
     async handleSubmit() {
       if ((await this.$validate()) === false) return;
@@ -70,6 +71,9 @@ export default {
         const token = response.data.token;
         localStorage.setItem("token", token);
         $axios.defaults.headers["Authorization"] = `Bearer ${token}`;
+
+        const userResponse = await $axios.get("/user");
+        this.login(userResponse.data.user);
         this.$router.replace("/");
       } catch (error) {
         this.showTooltip({

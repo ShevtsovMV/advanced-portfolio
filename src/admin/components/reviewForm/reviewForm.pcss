@@ -1,0 +1,111 @@
+@import "../../../styles/mixins.pcss";
+
+.form-cols {
+  display: flex;
+
+  @include phones {
+    flex-direction: column;
+
+  }
+}
+
+.form-col {
+  margin-right: 30px;
+
+  &:first-child {
+    width: 200PX;
+  }
+
+  &:last-child {
+    flex: 1;
+    margin-right: 0;
+  }
+
+  @include phones {
+    &:first-child {
+      align-self: center;
+      margin-bottom: 80px;
+      margin-right: 0;
+    }
+  }
+}
+
+.uploader {
+  height: 200PX;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #dee4ed;
+  border: 1px dashed #a1a1a1;
+  padding: 0 23%;
+  text-align: center;
+  position: relative;
+  background-size: cover;
+  
+  &:before {
+    content: "";
+    width: 91PX;
+    height: 99PX;
+    background: svg-load('user.svg', fill=#fff) center center / contain no-repeat;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &.active {
+    &:before {
+      display: none;
+    }
+  }
+
+  &.hovered {
+    border-color: blue;
+  }
+}
+
+.uploader-btn {
+  position: absolute;
+  top: 100%;
+}
+
+.form-row {
+  margin-bottom: 30px;
+}
+
+.form-btns {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn {
+  margin-right: 10px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.user-info {
+  display: flex;
+  justify-content: space-between;
+
+  @include tablets {
+    flex-direction: column;
+  }
+}
+
+.user-info-col {
+  width: calc(50% - 30px);
+
+  @include tablets {
+    width: 100%;
+    margin-bottom: 35px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

@@ -21,3 +21,27 @@
   }
 }
 
+.form {
+  margin-bottom: 30px;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -20px;
+}
+
+.item {
+  width: calc(100% / 3 - 30px);
+  margin-left: 30px;
+  margin-bottom: 30px;
+
+  @include tablets {
+    width: calc(100% / 2 - 30px);
+  }
+
+  @include phones {
+    width: 100%;
+    margin-left: 0;
+  }
+}

@@ -1,4 +1,8 @@
 import Vue from "vue";
+import axios from "axios";
+import config from "../../env.paths.json";
+
+axios.defaults.baseURL = config.BASE_URL;
 
 const thumbs = {
   props: ["currentWork", "works"],
@@ -16,6 +20,20 @@ const display = {
     thumbs,
     buttons
   },
+  methods: {
+    leave(el) {
+      el.classList.add("slide-out");
+    },
+    afterLeave(el) {
+      el.classList.remove("slide-out");
+    },
+    beforeEnter(el) {
+      el.classList.add("slide-in");
+    },
+    afterEnter(el) {
+      el.classList.remove("slide-in");
+    },
+  }
 };
 
 const tags = {
@@ -31,7 +49,7 @@ const info = {
   },
   computed: {
     tagsArray() {
-      return this.currentWork.skills.split(",");
+      return this.currentWork.techs.split(",");
     }
   }
 };
@@ -46,13 +64,14 @@ new Vue({
   data() {
     return {
       works: [],
-      currentIndex: 0
+      currentIndex: 0,
+      isDownloaded: false,
     };
   },
   computed: {
     currentWork() {
       return this.works[this.currentIndex];
-    }
+    },
   },
   watch: {
     currentIndex(value) {
@@ -67,7 +86,7 @@ new Vue({
     },
     requireImagesToArray(data) {
       return data.map(item => {
-        const requireImage = require(`../images/content/${item.photo}`).default;
+        const requireImage = `${config.BASE_URL}/${item.photo}`;
         item.photo = requireImage;
         return item
       });
@@ -80,14 +99,17 @@ new Vue({
         case "prev" :
           this.currentIndex--;
           break;
-          default :
+        default :
           this.currentIndex = direction;
           break;
       }
-    }
+    },
+    
   },
-  created() {
-    const data = require("../data/works-slider.json");
+  async created() {
+    const {data} = await axios.get("works/373");
     this.works = this.requireImagesToArray(data);
-  }
+    this.isDownloaded = true;
+  },
+  
 });
